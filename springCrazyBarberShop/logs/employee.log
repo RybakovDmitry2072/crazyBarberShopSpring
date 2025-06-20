@@ -1,20 +1,8 @@
-2025-06-07 12:41:38 [http-nio-8080-exec-1] DEBUG o.e.s.services.EmployeeService - Получение списка сотрудников по роли: BARBER, страница: 0, размер: 10
-2025-06-07 12:41:38 [http-nio-8080-exec-1] DEBUG o.e.s.services.EmployeeService - Найдено 6 сотрудников с ролью BARBER
-2025-06-07 12:57:25 [http-nio-8080-exec-2] DEBUG o.e.s.services.EmployeeService - Получение списка сотрудников по роли: BARBER, страница: 0, размер: 6
-2025-06-07 12:57:25 [http-nio-8080-exec-2] DEBUG o.e.s.services.EmployeeService - Найдено 6 сотрудников с ролью BARBER
-2025-06-07 13:09:35 [http-nio-8080-exec-8] DEBUG o.e.s.services.EmployeeService - Получение списка сотрудников по роли: BARBER, страница: 0, размер: 6
-2025-06-07 13:09:35 [http-nio-8080-exec-8] DEBUG o.e.s.services.EmployeeService - Найдено 6 сотрудников с ролью BARBER
-2025-06-07 13:09:59 [http-nio-8080-exec-5] DEBUG o.e.s.services.EmployeeService - Получение списка сотрудников по роли: BARBER, страница: 0, размер: 10
-2025-06-07 13:09:59 [http-nio-8080-exec-5] DEBUG o.e.s.services.EmployeeService - Найдено 6 сотрудников с ролью BARBER
-2025-06-07 13:10:10 [http-nio-8080-exec-10] DEBUG o.e.s.services.EmployeeService - Получение списка сотрудников по роли: BARBER, страница: 0, размер: 6
-2025-06-07 13:10:10 [http-nio-8080-exec-10] DEBUG o.e.s.services.EmployeeService - Найдено 6 сотрудников с ролью BARBER
-2025-06-07 13:11:51 [http-nio-8080-exec-8] DEBUG o.e.s.services.EmployeeService - Получение списка сотрудников по роли: BARBER, страница: 0, размер: 6
-2025-06-07 13:11:51 [http-nio-8080-exec-8] DEBUG o.e.s.services.EmployeeService - Найдено 6 сотрудников с ролью BARBER
-2025-06-07 13:14:04 [http-nio-8080-exec-8] DEBUG o.e.s.services.EmployeeService - Получение списка сотрудников по роли: BARBER, страница: 0, размер: 6
-2025-06-07 13:14:04 [http-nio-8080-exec-8] DEBUG o.e.s.services.EmployeeService - Найдено 6 сотрудников с ролью BARBER
-2025-06-07 13:14:13 [http-nio-8080-exec-4] DEBUG o.e.s.services.EmployeeService - Получение списка сотрудников по роли: BARBER, страница: 0, размер: 10
-2025-06-07 13:14:13 [http-nio-8080-exec-4] DEBUG o.e.s.services.EmployeeService - Найдено 6 сотрудников с ролью BARBER
-2025-06-07 13:17:05 [http-nio-8080-exec-3] DEBUG o.e.s.services.EmployeeService - Получение списка сотрудников по роли: BARBER, страница: 0, размер: 6
-2025-06-07 13:17:05 [http-nio-8080-exec-3] DEBUG o.e.s.services.EmployeeService - Найдено 6 сотрудников с ролью BARBER
-2025-06-07 13:17:51 [http-nio-8080-exec-10] DEBUG o.e.s.services.EmployeeService - Получение списка сотрудников по роли: BARBER, страница: 0, размер: 10
-2025-06-07 13:17:51 [http-nio-8080-exec-10] DEBUG o.e.s.services.EmployeeService - Найдено 6 сотрудников с ролью BARBER
+2025-06-20 21:43:37 [http-nio-8080-exec-3] DEBUG o.e.s.services.EmployeeService - Получение списка сотрудников по роли: BARBER, страница: 0, размер: 6
+2025-06-20 21:43:37 [http-nio-8080-exec-3] DEBUG o.e.s.services.EmployeeService - Найдено 6 сотрудников с ролью BARBER
+2025-06-20 21:44:50 [http-nio-8080-exec-2] DEBUG o.e.s.services.EmployeeService - Получение списка сотрудников по роли: BARBER, страница: 0, размер: 6
+2025-06-20 21:44:50 [http-nio-8080-exec-2] DEBUG o.e.s.services.EmployeeService - Найдено 6 сотрудников с ролью BARBER
+2025-06-20 21:45:18 [http-nio-8080-exec-5] DEBUG o.e.s.services.EmployeeService - Получение списка сотрудников по роли: BARBER, страница: 0, размер: 6
+2025-06-20 21:45:18 [http-nio-8080-exec-5] DEBUG o.e.s.services.EmployeeService - Найдено 6 сотрудников с ролью BARBER
+2025-06-20 21:45:22 [http-nio-8080-exec-5] DEBUG o.e.s.services.EmployeeService - Получение списка сотрудников по роли: BARBER, страница: 0, размер: 10
+2025-06-20 21:45:22 [http-nio-8080-exec-5] DEBUG o.e.s.services.EmployeeService - Найдено 6 сотрудников с ролью BARBER

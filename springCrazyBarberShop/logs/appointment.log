@@ -1,6 +1,1 @@
-2025-06-07 13:10:07 [http-nio-8080-exec-5] DEBUG o.e.s.services.AppointmentService - Создание новой записи для пользователя с email: yroboros2020@mail.ru
-2025-06-07 13:10:07 [http-nio-8080-exec-5] DEBUG o.e.s.services.AppointmentService - Данные формы: AppointmentForm(haircutCategoryId=10, employeeId=4, timeSlotId=124)
-2025-06-07 13:10:07 [http-nio-8080-exec-5] DEBUG o.e.s.services.AppointmentService - Запись успешно создана: Appointment(id=8, client=Client(), employee=Employee{id=4, firstName='Артем', lastName='Козлов', experienceYears=8, salary=95000.0}, timeSlot=TimeSlot{id=124, employeeId=4, startTime=2025-06-10T03:00, endTime=2025-06-10T04:00, booked=true}, haircutCategory=HaircutCategory(id=10, name=Стрижка бороды, price=1000.0), appointmentStatus=BOOKED)
-2025-06-07 13:10:13 [http-nio-8080-exec-4] DEBUG o.e.s.services.AppointmentService - Найдено заказов пользователя с id 7: 1
-2025-06-07 13:11:57 [http-nio-8080-exec-2] DEBUG o.e.s.services.AppointmentService - Найдено заказов пользователя с id 7: 1
-2025-06-07 13:14:10 [http-nio-8080-exec-4] DEBUG o.e.s.services.AppointmentService - Найдено заказов пользователя с id 7: 1
+2025-06-20 21:45:40 [http-nio-8080-exec-7] DEBUG o.e.s.services.AppointmentService - Найдено заказов пользователя с id 7: 0

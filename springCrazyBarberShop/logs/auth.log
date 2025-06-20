@@ -1,4 +1,1 @@
-2025-06-07 13:10:07 [http-nio-8080-exec-5] DEBUG o.e.s.services.AuthService - Получение текущего пользователя с ID: 7
-2025-06-07 13:10:13 [http-nio-8080-exec-5] DEBUG o.e.s.services.AuthService - Получение текущего пользователя с ID: 7
-2025-06-07 13:11:57 [http-nio-8080-exec-5] DEBUG o.e.s.services.AuthService - Получение текущего пользователя с ID: 7
-2025-06-07 13:14:10 [http-nio-8080-exec-3] DEBUG o.e.s.services.AuthService - Получение текущего пользователя с ID: 7
+2025-06-20 21:45:39 [http-nio-8080-exec-5] DEBUG o.e.s.services.AuthService - Получение текущего пользователя с ID: 7

@@ -1,126 +1,185 @@
 <!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8" />
-    <title>D3 Направленный граф</title>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <style>
-        body {
-            margin: 0;
-            font-family: sans-serif;
-        }
-        svg {
-            width: 100vw;
-            height: 100vh;
-            background: #f0f0f0;
-        }
-        line {
-            stroke: #999;
-            stroke-width: 2px;
-            marker-end: url(#arrow);
-        }
-        circle {
-            fill: #69b3a2;
-            stroke: #333;
-            stroke-width: 1.5px;
-        }
-        text {
-            font-size: 14px;
-            pointer-events: none;
-        }
-    </style>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{parts/header :: header}"></head>
 <body>
-<svg></svg>
+<header th:replace="~{parts/header :: navbar}"></header>
+
+<section class="hero">
+    <h1>Мужские стрижки</h1>
+    <p class="hero-address">Пушкинская ул., 107/72, Ростов-на-Дону</p>
+    <p class="hero-phone">+123 445 667 809</p>
+    <a href="/appointments" class="book-now-button">Book now</a>
+</section>
+
+<section class="info-tilda">
+    <div class="info-tilda__container">
+        <div class="info-tilda__col">
+            <div class="info-tilda__line"></div>
+            <div class="info-tilda__icon" style="background-image:url('/images/location.svg');"></div>
+            <div class="info-tilda__descr">Пушкинская ул., 107/72,<br>Ростов-на-Дону</div>
+        </div>
+        <div class="info-tilda__col">
+            <div class="info-tilda__line"></div>
+            <div class="info-tilda__icon" style="background-image:url('/images/clock.svg');"></div>
+            <div class="info-tilda__descr">10:00 – 22:00,<br>без выходных</div>
+        </div>
+        <div class="info-tilda__col">
+            <div class="info-tilda__line"></div>
+            <div class="info-tilda__icon" style="background-image:url('/images/phone.svg');"></div>
+            <div class="info-tilda__descr">Телефон<br>+123 445 667 809</div>
+        </div>
+    </div>
+</section>
+
+<section class="services-tilda" id="services">
+    <div class="services-tilda__container">
+        <div class="services-tilda__title">Наши услуги</div>
+        <div class="services-tilda__descr">
+            Мы создаем простые и стильные мужские прически, делаем нашу работу хорошо и быстро. Познакомьтесь с нашими услугами подробнее.
+        </div>
+        <div class="services-tilda__list" id="haircutCategoriesList">
+            <!-- Категории будут загружены через AJAX -->
+        </div>
+        <div class="services-tilda__pagination">
+            <button id="prevPage" class="services-tilda__btn" style="margin-right: 10px;">Назад</button>
+            <button id="nextPage" class="services-tilda__btn">Вперед</button>
+        </div>
+    </div>
+</section>
 
 <script>
-    const graph = {
-        nodes: [
-            { id: "A", label: "Узел A" },
-            { id: "B", label: "Узел B" },
-            { id: "C", label: "Узел C" },
-            { id: "D", label: "Узел D" }
-        ],
-        links: [
-            { source: "A", target: "B" },
-            { source: "B", target: "C" },
-            { source: "C", target: "D" },
-            { source: "D", target: "A" }
-        ]
-    };
+    $(document).ready(function() {
+        console.log('DOM готов, начинаем загрузку категорий');
 
-    const svg = d3.select("svg");
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+        let currentPage = 0;
+        const pageSize = 5;
+        let totalPages = 0;
 
-    // Marker for arrows
-    svg.append("defs").append("marker")
-        .attr("id", "arrow")
-        .attr("viewBox", "0 -5 10 10")
-        .attr("refX", 20)
-        .attr("refY", 0)
-        .attr("markerWidth", 6)
-        .attr("markerHeight", 6)
-        .attr("orient", "auto")
-        .append("path")
-        .attr("d", "M0,-5L10,0L0,5")
-        .attr("fill", "#999");
+        function loadHaircutCategories(page) {
+            console.log('Отправка запроса на /api/haircut-categories');
+            $.ajax({
+                url: '/api/haircut-categories',
+                method: 'GET',
+                data: {
+                    page: page,
+                    size: pageSize
+                },
+                beforeSend: function() {
+                    console.log('Отправка запроса...');
+                },
+                success: function(response) {
+                    console.log('Получен ответ:', response);
 
-    const link = svg.selectAll(".link")
-        .data(graph.links)
-        .enter().append("line")
-        .attr("class", "link");
+                    if (!response || !response.content) {
+                        console.error('Неверный формат ответа:', response);
+                        return;
+                    }
 
-    const node = svg.selectAll(".node")
-        .data(graph.nodes)
-        .enter().append("g")
-        .attr("class", "node")
-        .call(d3.drag()
-            .on("start", dragStarted)
-            .on("drag", dragged)
-            .on("end", dragEnded));
+                    totalPages = response.totalPages;
+                    const $categoriesList = $('#haircutCategoriesList');
+                    $categoriesList.empty();
 
-    node.append("circle")
-        .attr("r", 20);
+                    if (response.content.length > 0) {
+                        response.content.forEach(function(category) {
+                            console.log('Обработка категории:', category);
+                            const categoryHtml = `
+                                    <div class="services-tilda__item">
+                                        <div class="services-tilda__name">${category.name || 'Без названия'}</div>
+                                        <div class="services-tilda__price">₽${category.price || 0}</div>
+                                    </div>
+                                    <div class="services-tilda__line"></div>
+                                `;
+                            $categoriesList.append(categoryHtml);
+                        });
+                    } else {
+                        $categoriesList.append('<div class="services-tilda__item">Нет доступных категорий</div>');
+                    }
 
-    node.append("text")
-        .attr("dy", 4)
-        .attr("text-anchor", "middle")
-        .text(d => d.label);
+                    $('#prevPage').prop('disabled', page === 0);
+                    $('#nextPage').prop('disabled', page >= totalPages - 1);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Ошибка при загрузке категорий:');
+                    console.error('Статус:', status);
+                    console.error('Ошибка:', error);
+                    console.error('Ответ сервера:', xhr.responseText);
 
-    const simulation = d3.forceSimulation(graph.nodes)
-        .force("link", d3.forceLink(graph.links).id(d => d.id).distance(150))
-        .force("charge", d3.forceManyBody().strength(-400))
-        .force("center", d3.forceCenter(width / 2, height / 2))
-        .on("tick", ticked);
+                    const $categoriesList = $('#haircutCategoriesList');
+                    $categoriesList.empty().append('<div class="services-tilda__item">Ошибка загрузки категорий</div>');
+                }
+            });
+        }
 
-    function ticked() {
-        link
-            .attr("x1", d => d.source.x)
-            .attr("y1", d => d.source.y)
-            .attr("x2", d => d.target.x)
-            .attr("y2", d => d.target.y);
+        loadHaircutCategories(currentPage);
 
-        node
-            .attr("transform", d => `translate(${d.x},${d.y})`);
-    }
+        $('#prevPage').on('click', function() {
+            if (currentPage > 0) {
+                currentPage--;
+                loadHaircutCategories(currentPage);
+            }
+        });
 
-    function dragStarted(event, d) {
-        if (!event.active) simulation.alphaTarget(0.3).restart();
-        d.fx = d.x;
-        d.fy = d.y;
-    }
-
-    function dragged(event, d) {
-        d.fx = event.x;
-        d.fy = event.y;
-    }
-
-    function dragEnded(event, d) {
-        if (!event.active) simulation.alphaTarget(0);
-        d.fx = null;
-        d.fy = null;
-    }
+        $('#nextPage').on('click', function() {
+            if (currentPage < totalPages - 1) {
+                currentPage++;
+                loadHaircutCategories(currentPage);
+            }
+        });
+    });
 </script>
+
+<section class="gallery-custom" id="gallery">
+    <div class="gallery-custom__container">
+        <div class="gallery-custom__item gallery-custom__item--right">
+            <img src="/images/photo1.jpg" alt="Фото 1">
+        </div>
+        <div class="gallery-custom__item gallery-custom__item--left-bottom">
+            <img src="/images/photo2.jpg" alt="Фото 2">
+        </div>
+        <div class="gallery-custom__item gallery-custom__item--left-top">
+            <img src="/images/photo3.jpg" alt="Фото 3">
+        </div>
+    </div>
+</section>
+
+<section class="social-tilda" id="social">
+    <div class="social-tilda__container">
+        <div class="social-tilda__title">
+            Мы делимся с вами атмосферой нашего салона в
+            <a href="https://ваша_ссылка_на_соцсети" class="social-tilda__link" target="_blank">
+                Соцсетях
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="about-tilda" id="about">
+    <div class="about-tilda__container">
+        <div class="about-tilda__text">
+            <h2 class="about-tilda__title">О компании</h2>
+            <div class="about-tilda__descr">
+                Мы – дружная семья с высоким стандартом качества и ценностями. За годы мы выработали свой особенный стиль и рады приобщать клиентов к прекрасному. У нас не просто парикмахерская, это сообщество.
+            </div>
+        </div>
+        <div class="about-tilda__img">
+            <img src="/images/company.jpg" alt="О компании">
+        </div>
+    </div>
+</section>
+
+<section class="t532" id="team">
+    <div class="t-container">
+        <div class="t-col_12">
+            <div class="t-section__title t-align_center">Наши мастера</div>
+            <div class="t-section__descr t-align_center">Профессиональные барберы с многолетним опытом работы</div>
+        </div>
+        <div class="t532__container">
+            <!-- Сюда будут загружаться карточки сотрудников через AJAX -->
+        </div>
+    </div>
+</section>
+
+<footer th:replace="~{parts/footer :: footer}"></footer>
+<script th:src="@{/js/employees.js}"></script>
 </body>
 </html>

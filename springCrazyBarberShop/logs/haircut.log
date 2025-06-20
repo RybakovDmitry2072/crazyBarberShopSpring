@@ -1,175 +1,63 @@
-2025-06-07 12:57:25 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 12:57:25 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 5
-2025-06-07 12:57:25 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 5, sort: name: ASC]
-2025-06-07 12:57:25 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 12:57:25 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 12:57:25 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 5 записей
-2025-06-07 12:57:25 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:09:35 [http-nio-8080-exec-4] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:09:35 [http-nio-8080-exec-4] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 5
-2025-06-07 13:09:35 [http-nio-8080-exec-4] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 5, sort: name: ASC]
-2025-06-07 13:09:35 [http-nio-8080-exec-4] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:09:35 [http-nio-8080-exec-4] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:09:35 [http-nio-8080-exec-4] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 5 записей
-2025-06-07 13:09:35 [http-nio-8080-exec-4] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:09:43 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:09:43 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 1, размер: 5
-2025-06-07 13:09:43 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 1, size 5, sort: name: ASC]
-2025-06-07 13:09:43 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:09:43 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=1, name=Мужская стрижка, price=1200.0)
-2025-06-07 13:09:43 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 5 записей
-2025-06-07 13:09:43 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:09:59 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:09:59 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
-2025-06-07 13:09:59 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
-2025-06-07 13:09:59 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:09:59 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:09:59 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
-2025-06-07 13:09:59 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:09:59 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:09:59 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
-2025-06-07 13:09:59 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
-2025-06-07 13:09:59 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:09:59 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:09:59 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
-2025-06-07 13:09:59 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:09:59 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:09:59 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
-2025-06-07 13:09:59 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
-2025-06-07 13:09:59 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:09:59 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:09:59 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
-2025-06-07 13:09:59 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:09:59 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:09:59 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
-2025-06-07 13:09:59 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
-2025-06-07 13:09:59 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:09:59 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:09:59 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
-2025-06-07 13:09:59 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:09:59 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:09:59 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
-2025-06-07 13:09:59 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
-2025-06-07 13:09:59 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:09:59 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:09:59 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
-2025-06-07 13:09:59 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:09:59 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:09:59 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
-2025-06-07 13:09:59 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
-2025-06-07 13:09:59 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:09:59 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:09:59 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
-2025-06-07 13:09:59 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:10:10 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:10:10 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 5
-2025-06-07 13:10:10 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 5, sort: name: ASC]
-2025-06-07 13:10:10 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:10:10 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:10:10 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 5 записей
-2025-06-07 13:10:10 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:11:51 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:11:51 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 5
-2025-06-07 13:11:51 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 5, sort: name: ASC]
-2025-06-07 13:11:51 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:11:51 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:11:51 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 5 записей
-2025-06-07 13:11:51 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:14:04 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:14:04 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 5
-2025-06-07 13:14:04 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 5, sort: name: ASC]
-2025-06-07 13:14:04 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:14:04 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:14:04 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 5 записей
-2025-06-07 13:14:04 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:14:13 [http-nio-8080-exec-7] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:14:13 [http-nio-8080-exec-7] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
-2025-06-07 13:14:13 [http-nio-8080-exec-7] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
-2025-06-07 13:14:13 [http-nio-8080-exec-7] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:14:13 [http-nio-8080-exec-7] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:14:13 [http-nio-8080-exec-7] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
-2025-06-07 13:14:13 [http-nio-8080-exec-7] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:14:13 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:14:13 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
-2025-06-07 13:14:13 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
-2025-06-07 13:14:13 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:14:13 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:14:13 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
-2025-06-07 13:14:13 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:14:13 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:14:13 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
-2025-06-07 13:14:13 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
-2025-06-07 13:14:13 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:14:13 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:14:13 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
-2025-06-07 13:14:13 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:14:13 [http-nio-8080-exec-4] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:14:13 [http-nio-8080-exec-4] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
-2025-06-07 13:14:13 [http-nio-8080-exec-4] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
-2025-06-07 13:14:13 [http-nio-8080-exec-4] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:14:13 [http-nio-8080-exec-4] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:14:13 [http-nio-8080-exec-4] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
-2025-06-07 13:14:13 [http-nio-8080-exec-4] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:14:13 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:14:13 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
-2025-06-07 13:14:13 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
-2025-06-07 13:14:13 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:14:13 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:14:13 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
-2025-06-07 13:14:13 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:14:13 [http-nio-8080-exec-10] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:14:13 [http-nio-8080-exec-10] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
-2025-06-07 13:14:13 [http-nio-8080-exec-10] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
-2025-06-07 13:14:13 [http-nio-8080-exec-10] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:14:13 [http-nio-8080-exec-10] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:14:13 [http-nio-8080-exec-10] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
-2025-06-07 13:14:13 [http-nio-8080-exec-10] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:17:05 [http-nio-8080-exec-8] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:17:05 [http-nio-8080-exec-8] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 5
-2025-06-07 13:17:05 [http-nio-8080-exec-8] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 5, sort: name: ASC]
-2025-06-07 13:17:05 [http-nio-8080-exec-8] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:17:05 [http-nio-8080-exec-8] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:17:05 [http-nio-8080-exec-8] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 5 записей
-2025-06-07 13:17:05 [http-nio-8080-exec-8] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:17:51 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:17:51 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
-2025-06-07 13:17:51 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
-2025-06-07 13:17:51 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:17:51 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:17:51 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
-2025-06-07 13:17:51 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:17:51 [http-nio-8080-exec-2] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:17:51 [http-nio-8080-exec-2] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
-2025-06-07 13:17:51 [http-nio-8080-exec-2] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
-2025-06-07 13:17:51 [http-nio-8080-exec-2] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:17:51 [http-nio-8080-exec-2] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:17:51 [http-nio-8080-exec-2] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
-2025-06-07 13:17:51 [http-nio-8080-exec-2] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:17:51 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:17:51 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
-2025-06-07 13:17:51 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
-2025-06-07 13:17:51 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:17:51 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:17:51 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
-2025-06-07 13:17:51 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:17:51 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:17:51 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
-2025-06-07 13:17:51 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
-2025-06-07 13:17:51 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:17:51 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:17:51 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
-2025-06-07 13:17:51 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:17:51 [http-nio-8080-exec-1] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:17:51 [http-nio-8080-exec-1] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
-2025-06-07 13:17:51 [http-nio-8080-exec-1] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
-2025-06-07 13:17:51 [http-nio-8080-exec-1] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:17:51 [http-nio-8080-exec-1] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:17:51 [http-nio-8080-exec-1] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
-2025-06-07 13:17:51 [http-nio-8080-exec-1] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
-2025-06-07 13:17:51 [http-nio-8080-exec-7] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
-2025-06-07 13:17:51 [http-nio-8080-exec-7] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
-2025-06-07 13:17:51 [http-nio-8080-exec-7] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
-2025-06-07 13:17:51 [http-nio-8080-exec-7] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
-2025-06-07 13:17:51 [http-nio-8080-exec-7] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
-2025-06-07 13:17:51 [http-nio-8080-exec-7] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
-2025-06-07 13:17:51 [http-nio-8080-exec-7] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
+2025-06-20 21:43:37 [http-nio-8080-exec-4] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
+2025-06-20 21:43:37 [http-nio-8080-exec-4] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 5
+2025-06-20 21:43:37 [http-nio-8080-exec-4] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 5, sort: name: ASC]
+2025-06-20 21:43:37 [http-nio-8080-exec-4] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
+2025-06-20 21:43:37 [http-nio-8080-exec-4] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
+2025-06-20 21:43:37 [http-nio-8080-exec-4] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 5 записей
+2025-06-20 21:43:37 [http-nio-8080-exec-4] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
+2025-06-20 21:44:50 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
+2025-06-20 21:44:50 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 5
+2025-06-20 21:44:50 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 5, sort: name: ASC]
+2025-06-20 21:44:50 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
+2025-06-20 21:44:50 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
+2025-06-20 21:44:50 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 5 записей
+2025-06-20 21:44:50 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
+2025-06-20 21:45:18 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
+2025-06-20 21:45:18 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 5
+2025-06-20 21:45:18 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 5, sort: name: ASC]
+2025-06-20 21:45:19 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
+2025-06-20 21:45:19 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
+2025-06-20 21:45:19 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 5 записей
+2025-06-20 21:45:19 [http-nio-8080-exec-3] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
+2025-06-20 21:45:22 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
+2025-06-20 21:45:22 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
+2025-06-20 21:45:22 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
+2025-06-20 21:45:22 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
+2025-06-20 21:45:22 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
+2025-06-20 21:45:22 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
+2025-06-20 21:45:22 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
+2025-06-20 21:45:22 [http-nio-8080-exec-1] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
+2025-06-20 21:45:22 [http-nio-8080-exec-1] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
+2025-06-20 21:45:22 [http-nio-8080-exec-1] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
+2025-06-20 21:45:22 [http-nio-8080-exec-1] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
+2025-06-20 21:45:22 [http-nio-8080-exec-1] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
+2025-06-20 21:45:22 [http-nio-8080-exec-1] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
+2025-06-20 21:45:22 [http-nio-8080-exec-1] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
+2025-06-20 21:45:22 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
+2025-06-20 21:45:22 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
+2025-06-20 21:45:22 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
+2025-06-20 21:45:22 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
+2025-06-20 21:45:22 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
+2025-06-20 21:45:22 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
+2025-06-20 21:45:22 [http-nio-8080-exec-5] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
+2025-06-20 21:45:22 [http-nio-8080-exec-10] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
+2025-06-20 21:45:22 [http-nio-8080-exec-10] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
+2025-06-20 21:45:22 [http-nio-8080-exec-10] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
+2025-06-20 21:45:22 [http-nio-8080-exec-10] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
+2025-06-20 21:45:22 [http-nio-8080-exec-10] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
+2025-06-20 21:45:22 [http-nio-8080-exec-10] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
+2025-06-20 21:45:22 [http-nio-8080-exec-10] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
+2025-06-20 21:45:22 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
+2025-06-20 21:45:22 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
+2025-06-20 21:45:22 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
+2025-06-20 21:45:22 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
+2025-06-20 21:45:22 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
+2025-06-20 21:45:22 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
+2025-06-20 21:45:22 [http-nio-8080-exec-9] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
+2025-06-20 21:45:22 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - === Начало получения категорий в сервисе ===
+2025-06-20 21:45:22 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Запрошена страница: 0, размер: 10
+2025-06-20 21:45:22 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Создан Pageable объект: Page request [number: 0, size 10, sort: name: ASC]
+2025-06-20 21:45:22 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Получено записей из БД: 13
+2025-06-20 21:45:22 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Первая категория из БД: HaircutCategory(id=4, name=Бритьё головы, price=700.0)
+2025-06-20 21:45:22 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - Преобразовано в DTO: 10 записей
+2025-06-20 21:45:22 [http-nio-8080-exec-6] DEBUG o.e.s.s.HaircutCategoryService - === Завершение получения категорий в сервисе ===
