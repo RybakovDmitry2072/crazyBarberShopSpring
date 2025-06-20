@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin}" lang="ru-RU">
+<head>
+    <title>Административная панель</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container-fluid">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Панель управления</h1>
+        </div>
+
+        <div class="row">
+            <!-- Записи -->
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    Записи
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    Управление записями
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                        <a href="/admin/appointments" class="stretched-link"></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Клиенты -->
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    Клиенты
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    Управление клиентами
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-users fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                        <a href="/admin/clients" class="stretched-link"></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Услуги -->
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                    Услуги
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    Управление услугами
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-cut fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                        <a href="/admin/haircut-categories" class="stretched-link"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html> 

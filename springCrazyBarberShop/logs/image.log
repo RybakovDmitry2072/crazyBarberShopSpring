@@ -1,0 +1,5 @@
+2025-06-07 13:12:17 [http-nio-8080-exec-10] DEBUG o.e.s.services.ImageService - Начало загрузки файла: Снимок экрана 2025-06-07 в 13.12.07.png
+2025-06-07 13:12:17 [http-nio-8080-exec-10] DEBUG o.e.s.services.ImageService - Создана сущность файла: File(id=null, storageFileName=752f432c-4b8d-49fc-a868-8a012bad8bd3.png, originalFileName=Снимок экрана 2025-06-07 в 13.12.07.png, contentType=image/png, size=1234488, user=Client())
+2025-06-07 13:12:17 [http-nio-8080-exec-10] DEBUG o.e.s.services.ImageService - Сохранение файла в: /Users/rybakovdmitry/Desktop/sem-work-3-RybakovDmitry2072/springCrazyBarberShop/uploads/profile_images/752f432c-4b8d-49fc-a868-8a012bad8bd3.png
+2025-06-07 13:12:17 [http-nio-8080-exec-10] INFO  o.e.s.services.ImageService - Файл успешно сохранен: Снимок экрана 2025-06-07 в 13.12.07.png
+2025-06-07 13:12:17 [http-nio-8080-exec-10] DEBUG o.e.s.services.ImageService - Информация о файле сохранена в базе данных: File(id=7, storageFileName=752f432c-4b8d-49fc-a868-8a012bad8bd3.png, originalFileName=Снимок экрана 2025-06-07 в 13.12.07.png, contentType=image/png, size=1234488, user=Client())

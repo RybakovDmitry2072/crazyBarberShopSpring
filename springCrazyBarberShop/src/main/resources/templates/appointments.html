@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{parts/header :: header}"></head>
+<body>
+<header th:replace="~{parts/header :: navbar}"></header>
+
+<section class="appointments-section">
+    <div class="container">
+        <h2 class="section-title">Запись на стрижку</h2>
+        
+        <div class="appointments-loading" id="loadingState">
+            <i class="fas fa-spinner fa-spin"></i>
+            <h3>Загрузка доступных записей...</h3>
+        </div>
+
+        <div class="no-appointments" id="noAppointments" style="display: none;">
+            <i class="fas fa-calendar-times"></i>
+            <h3>Нет доступных записей</h3>
+            <p>К сожалению, на данный момент нет свободных слотов для записи. Пожалуйста, попробуйте позже или свяжитесь с нами по телефону.</p>
+        </div>
+
+        <div class="appointments-container" id="appointmentsContainer">
+            <!-- Сюда будут добавляться карточки записи через AJAX -->
+        </div>
+    </div>
+</section>
+
+<footer th:replace="~{parts/footer :: footer}"></footer>
+
+<script th:src="@{/js/appointments.js}"></script>
+</body>
+</html>

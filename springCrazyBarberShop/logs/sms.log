@@ -1,0 +1,8 @@
+2025-06-07 13:10:07 [NotificationThread-1] DEBUG o.e.s.services.SmsService - Подготовка к отправке SMS на номер: 89530873297
+2025-06-07 13:10:07 [NotificationThread-1] DEBUG o.e.s.services.SmsService - Текст сообщения: Ваша запись создана
+2025-06-07 13:10:07 [NotificationThread-1] DEBUG o.e.s.services.SmsService - URL запроса: https://sms.ru/sms/send?api_id=E19FE8B3-A31B-AA61-20B3-94238255D831&to=89530873297&msg=Ваша запись создана&json=1
+2025-06-07 13:10:07 [NotificationThread-1] INFO  o.e.s.services.SmsService - SMS успешно отправлено. Ответ сервера: {
+    "status": "ERROR",
+    "status_code": 201,
+    "status_text": "Не хватает средств на лицевом счету"
+}

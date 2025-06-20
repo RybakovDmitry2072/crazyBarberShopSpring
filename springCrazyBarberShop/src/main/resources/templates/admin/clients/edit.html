@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/admin}">
+<head>
+    <title>Редактирование клиента</title>
+    <meta name="_csrf" th:if="${_csrf}" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:if="${_csrf}" th:content="${_csrf.headerName}"/>
+    <style>
+        .user-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+        .image-preview {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Редактирование клиента</h6>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/admin/clients/{id}/edit(id=${client.id})}" 
+                  method="post" 
+                  class="needs-validation" 
+                  novalidate>
+                
+                <!-- Фото профиля -->
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="image-preview">
+                            <img th:if="${client.image != null}" 
+                                 th:src="@{'/profile_images/' + ${client.image.storageFileName}}"
+                                 class="user-avatar"
+                                 th:data-original="@{'/profile_images/' + ${client.image.storageFileName}}"
+                                 alt="Фото профиля">
+                            <img th:unless="${client.image != null}"
+                                 src="/images/default-avatar.jpg"
+                                 class="user-avatar"
+                                 alt="Фото по умолчанию">
+                            <div class="mt-2">
+                                <input type="file" 
+                                       class="form-control" 
+                                       id="imageFile" 
+                                       accept="image/*">
+                                <div class="form-text">Загрузите новое фото профиля (необязательно)</div>
+                            </div>
+                            <div class="form-check mt-2" th:if="${client.image != null}">
+                                <input class="form-check-input" 
+                                       type="checkbox" 
+                                       id="removeImage" 
+                                       name="removeImage">
+                                <label class="form-check-label" for="removeImage">
+                                    Удалить текущее фото
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Основная информация -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label">Имя</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="firstName" 
+                                   name="firstName" 
+                                   th:value="${client.firstName}" 
+                                   required>
+                            <div class="invalid-feedback">
+                                Пожалуйста, введите имя
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">Фамилия</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="lastName" 
+                                   name="lastName" 
+                                   th:value="${client.lastName}" 
+                                   required>
+                            <div class="invalid-feedback">
+                                Пожалуйста, введите фамилию
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" 
+                                   class="form-control" 
+                                   id="email" 
+                                   name="email" 
+                                   th:value="${client.email}" 
+                                   required>
+                            <div class="invalid-feedback">
+                                Пожалуйста, введите корректный email
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Телефон</label>
+                            <input type="tel" 
+                                   class="form-control" 
+                                   id="phone" 
+                                   name="phone" 
+                                   th:value="${client.phone}" 
+                                   required>
+                            <div class="invalid-feedback">
+                                Пожалуйста, введите номер телефона
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Роли -->
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <label class="form-label">Роли</label>
+                        <div class="d-flex flex-wrap gap-2">
+                            <div class="form-check" th:each="role : ${T(org.example.springcrazybarbershop.models.Role).values()}">
+                                <input class="form-check-input" 
+                                       type="checkbox" 
+                                       th:id="${'role-' + role}"
+                                       th:name="roles"
+                                       th:value="${role}"
+                                       th:checked="${client.roles != null and #lists.contains(client.roles, role)}">
+                                <label class="form-check-label" th:for="${'role-' + role}" th:text="${role}">
+                                    ROLE
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Сохранить
+                        </button>
+                        <a th:href="@{/admin/clients}" class="btn btn-secondary">
+                            <i class="fas fa-times"></i> Отмена
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="scripts">
+    <script>
+        (function () {
+            'use strict'
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+
+            // Загрузка изображения через AJAX
+            document.getElementById('imageFile').addEventListener('change', async function(e) {
+                if (e.target.files && e.target.files[0]) {
+                    const file = e.target.files[0];
+                    const formData = new FormData();
+                    formData.append('file', file);
+
+                    const clientId = window.location.pathname.split('/')[3]; // Получаем ID из URL
+                    const csrfToken = document.querySelector('meta[name="_csrf"]').content;
+                    const csrfHeader = document.querySelector('meta[name="_csrf_header"]').content;
+
+                    try {
+                        const response = await fetch(`/api/users/${clientId}/upload-image`, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                [csrfHeader]: csrfToken
+                            }
+                        });
+
+                        if (response.ok) {
+                            const result = await response.json();
+                            const avatarImg = document.querySelector('.user-avatar');
+                            avatarImg.src = `/profile_images/${result.storageFileName}?t=${Date.now()}`;
+                            const removeCheckbox = document.getElementById('removeImage');
+                            if (removeCheckbox) {
+                                removeCheckbox.checked = false;
+                            }
+                            toastr.success('Изображение успешно загружено');
+                        } else {
+                            toastr.error('Ошибка при загрузке изображения');
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        toastr.error('Ошибка при загрузке изображения');
+                    }
+                }
+            });
+
+            // Обработка чекбокса удаления изображения
+            const removeImageCheckbox = document.getElementById('removeImage');
+            if (removeImageCheckbox) {
+                removeImageCheckbox.addEventListener('change', function() {
+                    const imageInput = document.getElementById('imageFile');
+                    const avatarImg = document.querySelector('.user-avatar');
+                    if (this.checked) {
+                        imageInput.disabled = true;
+                        avatarImg.src = '/images/default-avatar.jpg';
+                    } else {
+                        imageInput.disabled = false;
+                        const originalImage = avatarImg.getAttribute('data-original');
+                        if (originalImage) {
+                            avatarImg.src = originalImage;
+                        }
+                    }
+                });
+            }
+        })()
+    </script>
+</th:block>
+</body>
+</html> 

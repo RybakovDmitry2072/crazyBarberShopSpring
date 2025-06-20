@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/admin}">
+<head>
+    <title>Создание записи</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Создание новой записи</h6>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/admin/appointments/new}" th:object="${appointment}" method="post">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="client">Клиент</label>
+                            <select class="form-control" id="client" th:field="*{client}" required>
+                                <option value="">Выберите клиента</option>
+                                <option th:each="client : ${clients}"
+                                        th:value="${client.id}"
+                                        th:text="${client.firstName + ' ' + client.lastName}">
+                                    Иван Иванов
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="employee">Мастер</label>
+                            <select class="form-control" id="employee" th:field="*{employee}" required>
+                                <option value="">Выберите мастера</option>
+                                <option th:each="employee : ${employees}"
+                                        th:value="${employee.id}"
+                                        th:text="${employee.firstName + ' ' + employee.lastName}">
+                                    Петр Петров
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="timeSlot">Время</label>
+                            <select class="form-control" id="timeSlot" th:field="*{timeSlot}" required>
+                                <option value="">Выберите время</option>
+                                <option th:each="slot : ${timeSlots}"
+                                        th:value="${slot.id}"
+                                        th:text="${slot.startTime}"
+                                        th:selected="${appointment.timeSlot != null and slot.id == appointment.timeSlot.id}">
+                                    01.01.2024 10:00
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="haircutCategory">Услуга</label>
+                            <select class="form-control" id="haircutCategory" th:field="*{haircutCategory}" required>
+                                <option value="">Выберите услугу</option>
+                                <option th:each="category : ${haircutCategories}"
+                                        th:value="${category.id}"
+                                        th:text="${category.name}">
+                                    Стрижка
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="appointmentStatus">Статус</label>
+                            <select class="form-control" id="appointmentStatus" th:field="*{appointmentStatus}" required>
+                                <option value="">Выберите статус</option>
+                                <option th:each="status : ${statuses}"
+                                        th:value="${status}"
+                                        th:text="${status}">
+                                    BOOKED
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Создать запись</button>
+                        <a th:href="@{/admin/appointments}" class="btn btn-secondary">Отмена</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="scripts">
+    <script>
+        $(document).ready(function() {
+            $('.form-control').select2({
+                theme: 'bootstrap4'
+            });
+        });
+    </script>
+</th:block>
+</body>
+</html> 

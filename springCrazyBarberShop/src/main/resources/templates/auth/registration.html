@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация - Sam & Juo Barbershop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body>
+<div class="auth-page">
+    <div class="auth-container">
+        <h2>Регистрация</h2>
+
+        <!-- Отображение глобальных ошибок -->
+        <div th:if="${message != null}" class="alert alert-danger">
+            <i class="fas fa-exclamation-circle"></i>
+            <span th:text="${message}"></span>
+        </div>
+
+        <form th:action="@{/auth/signup}" method="post" th:object="${signUpForm}">
+            <!-- Имя -->
+            <div class="form-group">
+                <label for="firstName">Имя</label>
+                <input type="text" id="firstName" th:field="*{firstName}" required
+                       placeholder="Введите ваше имя">
+                <small class="text-danger" th:if="${#fields.hasErrors('firstName')}"
+                       th:errors="*{firstName}"></small>
+            </div>
+
+            <!-- Фамилия -->
+            <div class="form-group">
+                <label for="lastName">Фамилия</label>
+                <input type="text" id="lastName" th:field="*{lastName}" required
+                       placeholder="Введите вашу фамилию">
+                <small class="text-danger" th:if="${#fields.hasErrors('lastName')}"
+                       th:errors="*{lastName}"></small>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" th:field="*{email}" required
+                       placeholder="Введите ваш email">
+                <small class="text-danger" th:if="${#fields.hasErrors('email')}"
+                       th:errors="*{email}"></small>
+            </div>
+
+            <!-- Телефон -->
+            <div class="form-group">
+                <label for="phone">Телефон</label>
+                <input type="tel" id="phone" th:field="*{phone}" required
+                       placeholder="Введите ваш номер телефона">
+                <small class="text-danger" th:if="${#fields.hasErrors('phone')}"
+                       th:errors="*{phone}"></small>
+            </div>
+
+            <!-- Пароль -->
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" th:field="*{password}" required
+                       placeholder="Придумайте пароль">
+                <small class="text-danger" th:if="${#fields.hasErrors('password')}"
+                       th:errors="*{password}"></small>
+            </div>
+
+            <!-- Подтверждение пароля -->
+            <div class="form-group">
+                <label for="matchingPassword">Подтвердите пароль</label>
+                <input type="password" id="matchingPassword" th:field="*{matchingPassword}" required
+                       placeholder="Повторите пароль">
+                <small class="text-danger" th:if="${#fields.hasErrors('matchingPassword')}"
+                       th:errors="*{matchingPassword}"></small>
+            </div>
+
+            <button type="submit">
+                <i class="fas fa-user-plus"></i> Зарегистрироваться
+            </button>
+
+            <div class="auth-divider">
+                <span>или</span>
+            </div>
+
+            <div class="auth-links">
+                <a th:href="@{/auth/signin}">
+                    <i class="fas fa-sign-in-alt"></i> Уже есть аккаунт? Войти
+                </a>
+                <br>
+                <a th:href="@{/}" class="mt-2 d-inline-block">
+                    <i class="fas fa-home"></i> На главную
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

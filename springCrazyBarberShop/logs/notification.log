@@ -1,0 +1,13 @@
+2025-06-07 13:11:11 [NotificationThread-2] INFO  o.e.s.services.NotificationService - Начинаем массовую рассылку уведомлений
+2025-06-07 13:11:11 [NotificationThread-2] INFO  o.e.s.services.NotificationService - Найдено 1 клиентов для рассылки
+2025-06-07 13:11:11 [NotificationThread-2] INFO  o.e.s.services.NotificationService - Попытка отправки email для клиента: yroboros2020@mail.ru (7)
+2025-06-07 13:11:11 [NotificationThread-2] DEBUG o.e.s.services.NotificationService - Подготовка к отправке email для yroboros2020@mail.ru
+2025-06-07 13:11:11 [NotificationThread-2] DEBUG o.e.s.services.NotificationService - Параметры отправки: from=yroboros2020@mail.ru, senderName=Crazy Barber Shop
+2025-06-07 13:11:11 [NotificationThread-2] DEBUG o.e.s.services.NotificationService - Подготовлено сообщение для yroboros2020@mail.ru: subject='Тест', messageLength=6
+2025-06-07 13:11:12 [NotificationThread-2] INFO  o.e.s.services.NotificationService - Email успешно отправлен: yroboros2020@mail.ru
+2025-06-07 13:11:12 [NotificationThread-2] INFO  o.e.s.services.NotificationService - Уведомление успешно отправлено клиенту: yroboros2020@mail.ru (1/1)
+2025-06-07 13:11:12 [NotificationThread-2] INFO  o.e.s.services.NotificationService - Массовая рассылка уведомлений завершена. Успешно: 1, Ошибок: 0, Всего: 1
+2025-06-07 13:13:37 [http-nio-8080-exec-9] DEBUG o.e.s.services.NotificationService - Подготовка к отправке email для yroboros2020@mail.ru
+2025-06-07 13:13:37 [http-nio-8080-exec-9] DEBUG o.e.s.services.NotificationService - Параметры отправки: from=yroboros2020@mail.ru, senderName=Crazy Barber Shop
+2025-06-07 13:13:37 [http-nio-8080-exec-9] DEBUG o.e.s.services.NotificationService - Подготовлено сообщение для yroboros2020@mail.ru: subject='Восстановление пароля - Crazy Barber Shop', messageLength=410
+2025-06-07 13:13:38 [http-nio-8080-exec-9] INFO  o.e.s.services.NotificationService - Email успешно отправлен: yroboros2020@mail.ru

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <title>Профиль пользователя</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<header th:replace="~{parts/header :: navbar}"></header>
+
+<div class="profile-header">
+    <div class="container text-center">
+        <div class="avatar-container mx-auto mb-3">
+            <img th:src="${user.image != null ? '/profile_images/' + user.image.storageFileName : '/images/default-avatar.jpg'}"
+                 alt="Аватар" class="img-fluid" />
+        </div>
+        <h2 th:text="${user.firstName + ' ' + user.lastName}">Имя Фамилия</h2>
+        <p class="text-light mb-0" th:text="${user.email}">email@example.com</p>
+        <input type="hidden" id="userId" th:value="${user.id}">
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="profile-card">
+                <div class="card-header">
+                    <h4><i class="fas fa-camera me-2"></i>Фото профиля</h4>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/api/users/{userId}/upload-image(userId=${user.id})}"
+                          method="post"
+                          enctype="multipart/form-data"
+                          id="uploadForm"
+                          class="text-center">
+                        <div class="mb-3">
+                            <input type="file" class="form-control" name="file" accept="image/*" required>
+                        </div>
+                        <button type="submit" class="profile-btn w-100">
+                            <i class="fas fa-upload me-2"></i>Обновить фото
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="profile-card">
+                <div class="card-header">
+                    <h4><i class="fas fa-user-edit me-2"></i>Личные данные</h4>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/api/users/{id}(id=${user.id})}"
+                          method="post"
+                          id="profileForm"
+                          class="profile-form">
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName" class="form-label">Имя</label>
+                                <input type="text" class="form-control" name="firstName" id="firstName"
+                                       th:field="*{user.firstName}" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName" class="form-label">Фамилия</label>
+                                <input type="text" class="form-control" name="lastName" id="lastName"
+                                       th:field="*{user.lastName}" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" name="email" id="email"
+                                       th:field="*{user.email}" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="phone" class="form-label">Телефон</label>
+                                <input type="tel" class="form-control" name="phone" id="phone"
+                                       th:field="*{user.phone}">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="profile-btn">
+                            <i class="fas fa-save me-2"></i>Сохранить изменения
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="profile-card mt-4">
+                <div class="card-header">
+                    <h4><i class="fas fa-calendar-check me-2"></i>Мои активные записи</h4>
+                </div>
+                <div class="card-body">
+                    <div id="appointmentsContainer">
+                        <div class="text-center">
+                            <i class="fas fa-spinner fa-spin"></i> Загрузка записей...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<template id="appointmentTemplate">
+    <div class="appointment-item">
+        <div class="appointment-info">
+            <div class="appointment-date"></div>
+            <div class="appointment-details">
+                <span class="barber-name"></span> •
+                <span class="service-name"></span> •
+                <span class="service-price"></span>
+            </div>
+        </div>
+        <div class="d-flex align-items-center">
+            <span class="appointment-status me-3"></span>
+            <button class="btn btn-danger btn-sm cancel-appointment" style="display: none;">
+                <i class="fas fa-times"></i> Отменить
+            </button>
+        </div>
+    </div>
+</template>
+
+<style>
+    #toastContainer .toast {
+        margin-bottom: 10px;
+        min-width: 300px;
+        transition: all 0.3s ease;
+    }
+    
+    .toast.show {
+        opacity: 1;
+    }
+    
+    .appointments-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .appointment-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        border-bottom: 1px solid #eee;
+        transition: background-color 0.3s;
+    }
+    
+    .appointment-item:last-child {
+        border-bottom: none;
+    }
+    
+    .appointment-item:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .appointment-info {
+        flex-grow: 1;
+    }
+    
+    .appointment-date {
+        font-weight: 500;
+        color: #2c3e50;
+        margin-bottom: 0.25rem;
+    }
+    
+    .appointment-details {
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+    
+    .appointment-status {
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+    
+    .status-active {
+        background-color: #e1f7e1;
+        color: #28a745;
+    }
+    
+    .status-completed {
+        background-color: #e2e3e5;
+        color: #6c757d;
+    }
+    
+    .status-cancelled {
+        background-color: #f8d7da;
+        color: #dc3545;
+    }
+
+    .cancel-appointment {
+        transition: all 0.3s ease;
+    }
+    
+    .cancel-appointment:hover {
+        transform: scale(1.05);
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+        const submitButton = this.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Загрузка...';
+
+        try {
+            const csrfToken = document.querySelector('meta[name="_csrf"]').content;
+            const csrfHeader = document.querySelector('meta[name="_csrf_header"]').content;
+
+            const response = await fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    [csrfHeader]: csrfToken
+                }
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                const newImageUrl = `/profile_images/${result.storageFileName}?t=${Date.now()}`;
+                const avatarImg = document.querySelector('.avatar-container img');
+                
+                avatarImg.style.opacity = '0';
+                setTimeout(() => {
+                    avatarImg.src = newImageUrl;
+                    avatarImg.style.opacity = '1';
+                }, 300);
+
+                showToast('success', 'Фото успешно обновлено!');
+            } else {
+                const error = await response.json();
+                showToast('error', 'Ошибка: ' + (error.message || 'Неизвестная ошибка'));
+            }
+        } catch (error) {
+            showToast('error', 'Ошибка сети: ' + error.message);
+        } finally {
+            submitButton.disabled = false;
+            submitButton.innerHTML = '<i class="fas fa-upload me-2"></i>Обновить фото';
+        }
+    });
+
+    document.getElementById('profileForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const csrfToken = document.querySelector('meta[name="_csrf"]').content;
+        const csrfHeader = document.querySelector('meta[name="_csrf_header"]').content;
+        const submitButton = this.querySelector('button[type="submit"]');
+        
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Сохранение...';
+
+        const formData = new FormData(this);
+        const jsonData = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch(this.action, {
+                method: 'PATCH',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                    [csrfHeader]: csrfToken
+                },
+                body: JSON.stringify(jsonData)
+            });
+
+            const result = response.status !== 204 ? await response.json() : {};
+
+            if (response.ok) {
+                if (result.firstName && result.lastName) {
+                    document.querySelector('.profile-header h2').textContent = 
+                        `${result.firstName} ${result.lastName}`;
+                }
+                if (result.email) {
+                    document.querySelector('.profile-header p').textContent = result.email;
+                }
+
+                showToast('success', 'Данные успешно обновлены!');
+            } else {
+                showToast('error', 'Ошибка: ' + (result.message || 'Неизвестная ошибка'));
+            }
+        } catch (error) {
+            showToast('error', 'Ошибка сети: ' + error.message);
+        } finally {
+            submitButton.disabled = false;
+            submitButton.innerHTML = '<i class="fas fa-save me-2"></i>Сохранить изменения';
+        }
+    });
+
+    // Функция для показа уведомлений
+    function showToast(type, message) {
+        const toastContainer = document.getElementById('toastContainer') || createToastContainer();
+        const toast = document.createElement('div');
+        toast.className = `toast show ${type === 'success' ? 'bg-success' : 'bg-danger'} text-white`;
+        toast.innerHTML = `
+            <div class="toast-body">
+                <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} me-2"></i>
+                ${message}
+            </div>
+        `;
+        toastContainer.appendChild(toast);
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+
+    function createToastContainer() {
+        const container = document.createElement('div');
+        container.id = 'toastContainer';
+        container.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
+        `;
+        document.body.appendChild(container);
+        return container;
+    }
+
+    // Функция для загрузки активных записей
+    async function loadActiveAppointments() {
+        const container = document.getElementById('appointmentsContainer');
+        const userId = document.getElementById('userId').value;
+        
+        try {
+            const csrfToken = document.querySelector('meta[name="_csrf"]').content;
+            const csrfHeader = document.querySelector('meta[name="_csrf_header"]').content;
+            
+            const response = await fetch(`/api/appointments?clientId=${userId}`, {
+                headers: {
+                    [csrfHeader]: csrfToken
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Ошибка при загрузке записей');
+            }
+
+            const appointments = await response.json();
+            console.log('Полученные записи:', appointments); // для отладки
+            
+            if (appointments.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center text-muted">
+                        <p>У вас пока нет активных записей</p>
+                        <a href="/appointments" class="btn btn-primary">
+                            <i class="fas fa-calendar-plus me-2"></i>Записаться
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+
+            const template = document.getElementById('appointmentTemplate');
+            container.innerHTML = '';
+
+            appointments.forEach(appointment => {
+                const clone = template.content.cloneNode(true);
+                
+                clone.querySelector('.appointment-date').textContent = appointment.timeSlotDto.startTime;
+                clone.querySelector('.barber-name').textContent = 
+                    `${appointment.employeeDto.firstName} ${appointment.employeeDto.lastName}`;
+                clone.querySelector('.service-name').textContent = appointment.haircutCategory.name;
+                clone.querySelector('.service-price').textContent = `${appointment.haircutCategory.price}₽`;
+                
+                const statusElement = clone.querySelector('.appointment-status');
+                statusElement.textContent = appointment.status;
+                statusElement.classList.add(`status-${appointment.status.toLowerCase()}`);
+                
+                const cancelButton = clone.querySelector('.cancel-appointment');
+                cancelButton.style.display = 'block';
+                cancelButton.setAttribute('data-appointment-id', appointment.id);
+                cancelButton.addEventListener('click', async function() {
+                    if (confirm('Вы уверены, что хотите отменить запись?')) {
+                        const appointmentId = this.getAttribute('data-appointment-id');
+                        await cancelAppointment(appointmentId);
+                    }
+                });
+                
+                container.appendChild(clone);
+            });
+        } catch (error) {
+            console.error('Ошибка при загрузке записей:', error); // для отладки
+            container.innerHTML = `
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    Ошибка при загрузке записей: ${error.message}
+                </div>
+            `;
+        }
+    }
+
+    // функция отмены записи
+    async function cancelAppointment(appointmentId) {
+        try {
+            const csrfToken = document.querySelector('meta[name="_csrf"]').content;
+            const csrfHeader = document.querySelector('meta[name="_csrf_header"]').content;
+            
+            const response = await fetch(`/api/appointments/${appointmentId}`, {
+                method: 'DELETE',
+                headers: {
+                    [csrfHeader]: csrfToken
+                }
+            });
+
+            if (response.ok) {
+                showToast('success', 'Запись успешно отменена');
+                // Перезагружаем список записей
+                loadActiveAppointments();
+            } else {
+                const error = await response.json();
+                showToast('error', error.message || 'Ошибка при отмене записи');
+            }
+        } catch (error) {
+            console.error('Ошибка при отмене записи:', error);
+            showToast('error', 'Ошибка при отмене записи');
+        }
+    }
+
+    // Загружаем записи при загрузке страницы
+    document.addEventListener('DOMContentLoaded', function() {
+        loadActiveAppointments();
+    });
+</script>
+
+<footer th:replace="~{parts/footer :: footer}"></footer>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="header">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="_csrf" th:if="${_csrf}" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:if="${_csrf}" th:content="${_csrf.headerName}"/>
+    <title>Sam & Juo Barbershop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
+    <link th:href="@{/css/toastr.min.css}" rel="stylesheet">
+    <script th:src="@{/js/lib/toastr.min.js}"></script>
+</head>
+
+<header th:fragment="navbar" class="main-header">
+    <div class="header-container">
+        <div class="header-col nav-col">
+            <nav class="main-navigation">
+                <a href="/#">Главная</a>
+                <a href="/#services">Услуги</a>
+                <a href="/#gallery">Фотографии</a>
+                <a href="/#about">О нас</a>
+                <a href="/#team">Мастера</a>
+                <a href="/appointments">Записаться</a>
+                <a sec:authorize="hasRole('ADMIN')" href="/admin">Админ-панель</a>
+            </nav>
+        </div>
+
+        <div class="header-col btn-col">
+            <div class="auth-buttons">
+                <div sec:authorize="isAuthenticated()">
+                    <a href="/profile" class="nav-link">
+                        <i class="fas fa-user me-1"></i>
+                        <span sec:authentication="name"></span>
+                    </a>
+                    <form th:action="@{/auth/perform_logout}" method="post" style="display: inline;">
+                        <button type="submit" class="nav-link">
+                            <i class="fas fa-sign-out-alt me-1"></i>Выйти
+                        </button>
+                    </form>
+                </div>
+                <div sec:authorize="!isAuthenticated()">
+                    <a href="/auth/signin" class="nav-link">
+                        <i class="fas fa-sign-in-alt me-1"></i>Войти
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+</html>

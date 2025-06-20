@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/admin}">
+<head>
+    <title>Ошибка</title>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var status = /*[[${status}]]*/ '';
+        window.onload = function() {
+            if (status === 403) {
+                window.location.href = '/error/403';
+            } else if (status === 404) {
+                window.location.href = '/error/404';
+            } else {
+                window.location.href = '/error/500';
+            }
+        };
+        /*]]>*/
+    </script>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container-fluid">
+        <div class="text-center">
+            <p>Перенаправление...</p>
+        </div>
+    </div>
+</div>
+</body>
+</html> 

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/admin}">
+<head>
+    <title>Список клиентов</title>
+    <meta name="_csrf" th:if="${_csrf}" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:if="${_csrf}" th:content="${_csrf.headerName}"/>
+    <style>
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .role-badge {
+            display: inline-block;
+            padding: 0.25em 0.6em;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 0.25rem;
+            margin: 0.1rem;
+            color: white;
+        }
+        .role-ADMIN { background-color: #dc3545; }
+        .role-USER { background-color: #28a745; }
+        .role-CLIENT { background-color: #007bff; }
+        .role-EMPLOYEE { background-color: #6c757d; }
+        .role-BARBER { background-color: #17a2b8; }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <!-- Заголовок и поиск -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <h6 class="m-0 font-weight-bold text-primary">Управление клиентами</h6>
+                <a href="/admin/clients/new" class="btn btn-primary btn-sm ms-3">
+                    <i class="fas fa-user-plus"></i> Добавить клиента
+                </a>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="searchInput" 
+                           placeholder="Поиск по имени, фамилии или email">
+                    <button class="btn btn-primary" type="button" id="searchButton">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <!-- Таблица клиентов -->
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="clientsTable">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Фото</th>
+                            <th>ID</th>
+                            <th>Имя</th>
+                            <th>Фамилия</th>
+                            <th>Email</th>
+                            <th>Телефон</th>
+                            <th>Роли</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="client : ${clients}">
+                            <td>
+                                <img th:if="${client.image != null}" 
+                                     th:src="@{'/profile_images/' + ${client.image.storageFileName}}"
+                                     class="user-avatar"
+                                     alt="Фото профиля">
+                                <img th:unless="${client.image != null}"
+                                     src="/images/default-avatar.jpg"
+                                     class="user-avatar"
+                                     alt="Фото по умолчанию">
+                            </td>
+                            <td th:text="${client.id}">1</td>
+                            <td th:text="${client.firstName}">John</td>
+                            <td th:text="${client.lastName}">Doe</td>
+                            <td th:text="${client.email}">john@example.com</td>
+                            <td th:text="${client.phone}">+1234567890</td>
+                            <td>
+                                <span th:each="role : ${client.roles}"
+                                      th:class="'role-badge role-' + ${role}"
+                                      th:text="${role}">ROLE</span>
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <a th:href="@{/admin/clients/{id}/edit(id=${client.id})}" 
+                                       class="btn btn-warning btn-sm" title="Редактировать">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <button type="button" 
+                                            class="btn btn-danger btn-sm delete-client" 
+                                            th:data-client-id="${client.id}"
+                                            title="Удалить">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Пагинация -->
+            <div class="row mt-3">
+                <div class="col">
+                    <nav aria-label="Навигация по страницам">
+                        <ul class="pagination justify-content-center" id="pagination">
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-auto">
+                    <select class="form-select" id="pageSize">
+                        <option value="10">10 записей</option>
+                        <option value="25">25 записей</option>
+                        <option value="50">50 записей</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="scripts">
+    <script th:inline="javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация toastr
+            if (typeof toastr === 'undefined') {
+                toastr = {
+                    success: function(msg) { alert('Успешно: ' + msg); },
+                    error: function(msg) { alert('Ошибка: ' + msg); },
+                    warning: function(msg) { alert('Предупреждение: ' + msg); }
+                };
+            } else {
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "timeOut": "3000"
+                };
+            }
+
+            let currentPage = 0;
+            let pageSize = 10;
+            let totalPages = 0;
+            let searchQuery = '';
+            
+            // Функция для получения CSRF токенов
+            function getCsrfTokens() {
+                const token = document.querySelector('meta[name="_csrf"]')?.getAttribute('content');
+                const header = document.querySelector('meta[name="_csrf_header"]')?.getAttribute('content');
+                return { token, header };
+            }
+
+            function loadClients() {
+                const url = searchQuery 
+                    ? `/api/admin/clients/search?query=${searchQuery}&page=${currentPage}&size=${pageSize}`
+                    : `/api/admin/clients?page=${currentPage}&size=${pageSize}`;
+                
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        const tbody = document.querySelector('#clientsTable tbody');
+                        tbody.innerHTML = '';
+                        
+                        if (!data || !data.content || data.content.length === 0) {
+                            toastr.warning('Нет данных для отображения');
+                            return;
+                        }
+
+                        data.content.forEach(function(client) {
+                            if (!client) return;
+                            
+                            const roles = client.roles ? client.roles.map(role => 
+                                `<span class="role-badge role-${role}">${role}</span>`
+                            ).join('') : '';
+                            
+                            const avatarUrl = client.image ? 
+                                `/profile_images/${client.image.storageFileName}` : 
+                                '/images/default-avatar.jpg';
+                            
+                            tbody.innerHTML += `
+                                <tr data-client-id="${client.id || ''}">
+                                    <td>
+                                        <img src="${avatarUrl}" class="user-avatar" alt="Фото профиля">
+                                    </td>
+                                    <td>${client.id || ''}</td>
+                                    <td>${client.firstName || ''}</td>
+                                    <td>${client.lastName || ''}</td>
+                                    <td>${client.email || ''}</td>
+                                    <td>${client.phone || ''}</td>
+                                    <td>${roles}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="/admin/clients/${client.id}/edit" 
+                                               class="btn btn-warning btn-sm" title="Редактировать">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <button type="button" 
+                                                    class="btn btn-danger btn-sm delete-client"
+                                                    data-client-id="${client.id}"
+                                                    title="Удалить">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+                        
+                        totalPages = data.totalPages || 0;
+                        currentPage = data.currentPage || 0;
+                        updatePagination();
+
+                        // Добавляем обработчики для новых кнопок удаления
+                        document.querySelectorAll('.delete-client').forEach(button => {
+                            button.addEventListener('click', function() {
+                                const clientId = this.getAttribute('data-client-id');
+                                deleteClient(clientId);
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Ошибка при загрузке клиентов:', error);
+                        toastr.error('Ошибка при загрузке списка клиентов');
+                    });
+            }
+
+            function updatePagination() {
+                const pagination = document.getElementById('pagination');
+                pagination.innerHTML = '';
+                
+                if (totalPages <= 1) return;
+
+                // Кнопка "Предыдущая"
+                pagination.innerHTML += `
+                    <li class="page-item ${currentPage === 0 ? 'disabled' : ''}">
+                        <a class="page-link" href="javascript:void(0)" data-page="${currentPage - 1}">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                    </li>
+                `;
+                
+                // Номера страниц
+                for (let i = 0; i < totalPages; i++) {
+                    pagination.innerHTML += `
+                        <li class="page-item ${currentPage === i ? 'active' : ''}">
+                            <a class="page-link" href="javascript:void(0)" data-page="${i}">${i + 1}</a>
+                        </li>
+                    `;
+                }
+                
+                // Кнопка "Следующая"
+                pagination.innerHTML += `
+                    <li class="page-item ${currentPage === totalPages - 1 ? 'disabled' : ''}">
+                        <a class="page-link" href="javascript:void(0)" data-page="${currentPage + 1}">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                `;
+
+                // Добавляем обработчики для пагинации
+                pagination.querySelectorAll('.page-link').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const page = parseInt(this.getAttribute('data-page'));
+                        if (page >= 0 && page < totalPages) {
+                            currentPage = page;
+                            loadClients();
+                        }
+                    });
+                });
+            }
+
+            function deleteClient(id) {
+                if (confirm('Вы уверены, что хотите удалить этого клиента?')) {
+                    const { token: csrfToken, header: csrfHeader } = getCsrfTokens();
+
+                    if (!csrfToken || !csrfHeader) {
+                        console.error('CSRF token or header not found');
+                        toastr.error('Ошибка безопасности: CSRF токен не найден');
+                        return;
+                    }
+
+                    performDelete(id, csrfToken, csrfHeader);
+                }
+            }
+
+            function performDelete(id, csrfToken, csrfHeader) {
+                const headers = new Headers({
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                });
+
+                headers.append(csrfHeader, csrfToken);
+
+                fetch(`/api/admin/clients/${id}`, {
+                    method: 'DELETE',
+                    headers: headers,
+                    credentials: 'same-origin',
+                    mode: 'same-origin'
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        if (response.status === 403) {
+                            throw new Error('Доступ запрещен');
+                        } else if (response.status === 401) {
+                            throw new Error('Необходима авторизация');
+                        } else if (response.status === 405) {
+                            throw new Error('Метод не поддерживается');
+                        }
+                        return response.json().then(err => {
+                            throw new Error(err.message || 'Network response was not ok');
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    toastr.success(data.message || 'Клиент успешно удален');
+                    loadClients();
+                })
+                .catch(error => {
+                    console.error('Ошибка при удалении:', error);
+                    toastr.error(`Ошибка при удалении клиента: ${error.message}`);
+                    if (error.message === 'Необходима авторизация') {
+                        window.location.href = '/auth/signin';
+                    }
+                });
+            }
+
+            // Обработчик изменения размера страницы
+            document.getElementById('pageSize').addEventListener('change', function() {
+                pageSize = parseInt(this.value);
+                currentPage = 0;
+                loadClients();
+            });
+            
+            // Обработчик поиска
+            let searchTimeout;
+            document.getElementById('searchInput').addEventListener('keyup', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    searchQuery = this.value;
+                    currentPage = 0;
+                    loadClients();
+                }, 500);
+            });
+            
+            document.getElementById('searchButton').addEventListener('click', function() {
+                searchQuery = document.getElementById('searchInput').value;
+                currentPage = 0;
+                loadClients();
+            });
+
+            // Инициализация при загрузке страницы
+            loadClients();
+        });
+    </script>
+</th:block>
+</body>
+</html> 

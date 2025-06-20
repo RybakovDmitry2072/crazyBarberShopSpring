@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>D3 Направленный граф</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+        }
+        svg {
+            width: 100vw;
+            height: 100vh;
+            background: #f0f0f0;
+        }
+        line {
+            stroke: #999;
+            stroke-width: 2px;
+            marker-end: url(#arrow);
+        }
+        circle {
+            fill: #69b3a2;
+            stroke: #333;
+            stroke-width: 1.5px;
+        }
+        text {
+            font-size: 14px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+<svg></svg>
+
+<script>
+    const graph = {
+        nodes: [
+            { id: "A", label: "Узел A" },
+            { id: "B", label: "Узел B" },
+            { id: "C", label: "Узел C" },
+            { id: "D", label: "Узел D" }
+        ],
+        links: [
+            { source: "A", target: "B" },
+            { source: "B", target: "C" },
+            { source: "C", target: "D" },
+            { source: "D", target: "A" }
+        ]
+    };
+
+    const svg = d3.select("svg");
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    // Marker for arrows
+    svg.append("defs").append("marker")
+        .attr("id", "arrow")
+        .attr("viewBox", "0 -5 10 10")
+        .attr("refX", 20)
+        .attr("refY", 0)
+        .attr("markerWidth", 6)
+        .attr("markerHeight", 6)
+        .attr("orient", "auto")
+        .append("path")
+        .attr("d", "M0,-5L10,0L0,5")
+        .attr("fill", "#999");
+
+    const link = svg.selectAll(".link")
+        .data(graph.links)
+        .enter().append("line")
+        .attr("class", "link");
+
+    const node = svg.selectAll(".node")
+        .data(graph.nodes)
+        .enter().append("g")
+        .attr("class", "node")
+        .call(d3.drag()
+            .on("start", dragStarted)
+            .on("drag", dragged)
+            .on("end", dragEnded));
+
+    node.append("circle")
+        .attr("r", 20);
+
+    node.append("text")
+        .attr("dy", 4)
+        .attr("text-anchor", "middle")
+        .text(d => d.label);
+
+    const simulation = d3.forceSimulation(graph.nodes)
+        .force("link", d3.forceLink(graph.links).id(d => d.id).distance(150))
+        .force("charge", d3.forceManyBody().strength(-400))
+        .force("center", d3.forceCenter(width / 2, height / 2))
+        .on("tick", ticked);
+
+    function ticked() {
+        link
+            .attr("x1", d => d.source.x)
+            .attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x)
+            .attr("y2", d => d.target.y);
+
+        node
+            .attr("transform", d => `translate(${d.x},${d.y})`);
+    }
+
+    function dragStarted(event, d) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+    }
+
+    function dragged(event, d) {
+        d.fx = event.x;
+        d.fy = event.y;
+    }
+
+    function dragEnded(event, d) {
+        if (!event.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+    }
+</script>
+</body>
+</html>
